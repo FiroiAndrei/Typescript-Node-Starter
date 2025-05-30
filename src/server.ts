@@ -1,10 +1,14 @@
 import http from 'http';
 import express from 'express';
 import './config/logging';
+import 'reflect-metadata';
+
 import { loggingHandler } from './middleware/loggingHandler';
 import { corsHandler } from './middleware/corsHandler';
 import { routeNotFound } from './middleware/routeNotFound';
 import { SERVER } from './config/config';
+import { defineRoutes } from './modules/routes';
+import MainController from './controllers/main';
 
 export const app = express();
 export let httpServer: ReturnType<typeof http.createServer>;
@@ -27,10 +31,7 @@ export const Main = () => {
     logging.info('Define controllers');
     logging.info('-------------------------------------------');
 
-    app.get('/main/healthcheck', (req, res, next) => {
-        res.status(200).json({ hello: 'World!' });
-        return;
-    });
+    defineRoutes([MainController], app);
 
     logging.info('-------------------------------------------');
     logging.info('Define Not Found Method');

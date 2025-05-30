@@ -1,0 +1,14 @@
+@BASE_URL = http://localhost:12345
+
+
+GET {{BASE_URL}}/healthcheck
+
+###
+
+POST {{BASE_URL}}/healthcheck HTTP/1.1
+content-type: application/json
+
+{
+    "name": "a",
+    "a": "as"
+}
