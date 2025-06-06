@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app, Shutdown } from '../../src/server';
 
-describe('Our Application', () => {
+describe('Our app', () => {
     afterAll((done) => {
         Shutdown(done);
     });
@@ -11,7 +11,7 @@ describe('Our Application', () => {
         expect(app).toBeDefined();
     }, 10000);
 
-    it('Returns all options allowed to be called by customers (http methods', async () => {
+    it('Returns all options allowed to be called', async () => {
         const response = await request(app).options('/');
 
         expect(response.status).toBe(200);
